@@ -60,7 +60,8 @@ body {
 .card-back {
   background-color: white; /* White picture side */
   border: 2px solid black; /* Black outline */
-  background-size: cover; /* Image on the back */
+  background-size: contain; /* Image on the back */
+  background-repeat: no-repeat;
   background-position: center;
   transform: rotateY(180deg);
 }
@@ -137,5 +138,18 @@ body {
   }
   100% {
     transform: translateY(100vh) rotate(720deg); /* Confetti falls and rotates faster */
+  }
+}
+
+
+@media (max-width: 768px) {
+  #game-board {
+    grid-auto-rows: 120px; /* Adjust card height for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  #game-board {
+    grid-auto-rows: 100px; /* Adjust card height for mobile */
   }
 }
