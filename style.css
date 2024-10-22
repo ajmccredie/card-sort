@@ -6,21 +6,20 @@ body {
   padding: 0;
 }
 
-h1 {
-  margin-top: 20px;
-}
-
 #game-board {
   display: grid;
-  grid-template-columns: repeat(5, 100px); /* 5 columns */
-  grid-gap: 10px;
-  justify-content: center;
+  grid-template-columns: repeat(5, 1fr); /* 5 columns */
+  grid-auto-rows: 150px; /* Set a fixed height for rows */
+  gap: 10px; /* Space between cards */
+  justify-items: center; /* Center items within grid cells */
   margin: 20px auto;
+  width: 90%; /* Make it responsive */
+  max-width: 600px; /* Set a max width for larger screens */
 }
 
 .card {
-  width: 100px;
-  height: 150px;
+  width: 100%; /* Use full width of grid cell */
+  height: 100%; /* Use full height of grid cell */
   background-color: #333; /* Grey by default */
   border-radius: 10px;
   cursor: pointer;
@@ -49,86 +48,94 @@ h1 {
 }
 
 .card-front {
-  background-color: #333; /* Grey front (visible at the start) */
-  transform: rotateY(0deg); /* Show this side by default */
+  background-color: white; /* White front */
+  border: 2px solid #333; /* Dark grey outline */
+  background-image: url('images/logo-gc.png');
+  background-size: contain; /* Adjusted to contain */
+  background-repeat: no-repeat; /* Prevents repeating */
+  background-position: center;
+  transform: rotateY(0deg);
 }
 
 .card-back {
-  background-size: cover; /* Ensure image fits the card */
+  background-color: white; /* White picture side */
+  border: 2px solid black; /* Black outline */
+  background-size: cover; /* Image on the back */
   background-position: center;
-  background-color: transparent; /* Back starts hidden */
-  transform: rotateY(180deg); /* Flipped side shows the image */
+  transform: rotateY(180deg);
 }
 
 .hidden {
   visibility: hidden;
 }
 
-#game-stats {
-  margin-top: 20px;
+/* Center Play Again Button */
+#play-again-btn {
+  display: block;
+  margin: 20px auto;
 }
 
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
 
-/* Game end celebration */
-
-/* Confetti animation */
-@keyframes confetti {
-0% { transform: translateY(0) rotate(0); }
-100% { transform: translateY(300px) rotate(360deg); }
-}
-
-/* Hidden class for showing/hiding elements */
-.hidden {
-  visibility: hidden;
-}
-
-/* Celebration message */
-#celebration {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  z-index: 1000;
-  display: none;
-}
-
-#celebration h2 {
-  font-size: 40px;
-  margin-bottom: 10px;
-}
-
-#celebration p {
-  font-size: 24px;
-}
-
-/* Confetti element */
+/* Confetti styling */
 .confetti {
-  width: 10px;
+  position: fixed;
+  width: 10px;  /* Base size, will vary */
   height: 10px;
-  position: absolute;
   top: 0;
-  left: 50%;
-  background-color: #FF5733;
-  animation: confetti 2s ease-in-out infinite;
+  animation: confettiFall linear infinite;
   opacity: 0.8;
 }
 
-.confetti:nth-child(odd) {
-  background-color: #33FF57;
-  animation-duration: 3s;
+/* Varying sizes */
+.confetti:nth-child(3n+1) {
+  width: 8px;
+  height: 8px;
+  background-color: #ffd700; /* Gold */
 }
 
-.confetti:nth-child(even) {
-  background-color: #3357FF;
-  animation-duration: 2.5s;
+.confetti:nth-child(3n+2) {
+  width: 12px;
+  height: 12px;
+  background-color: #ffcc00; /* Yellowish gold */
+}
+
+.confetti:nth-child(3n+3) {
+  width: 12px;
+  height: 12px;
+  background-color: #f4a460; /* Sandy gold */
+}
+
+/* Varying falling speeds and delays */
+.confetti:nth-child(5n+1) {
+  animation-duration: 6s;
+  animation-delay: 0.5s;
+}
+
+.confetti:nth-child(5n+2) {
+  animation-duration: 8s;
+  animation-delay: 1s;
+}
+
+.confetti:nth-child(5n+3) {
+  animation-duration: 10s;
+  animation-delay: 1.5s;
+}
+
+.confetti:nth-child(5n+4) {
+  animation-duration: 12s;
+  animation-delay: 0.2s;
+}
+
+.confetti:nth-child(5n+5) {
+  animation-duration: 14s;
+  animation-delay: 0.8s;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg); /* Confetti falls and rotates faster */
+  }
 }
