@@ -1,26 +1,38 @@
-/* Basic styling */
-body {
+/* Background and container */
+body.quiz-background {
+  background-color: black;
+  color: #FFD700;
   font-family: Arial, sans-serif;
-  text-align: center;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
+/* Title Styling */
+.quiz-title {
+  text-align: center;
+  color: #FFD700;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+}
+
+/* Game Board */
 #game-board {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 columns */
-  grid-auto-rows: 150px; /* Set a fixed height for rows */
-  gap: 10px; /* Space between cards */
-  justify-items: center; /* Center items within grid cells */
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 150px;
+  gap: 10px;
+  justify-items: center;
   margin: 20px auto;
-  width: 90%; /* Make it responsive */
-  max-width: 600px; /* Set a max width for larger screens */
+  width: 90%;
+  max-width: 600px;
 }
 
+/* Card Styling */
 .card {
-  width: 100%; /* Use full width of grid cell */
-  height: 100%; /* Use full height of grid cell */
-  background-color: #333; /* Grey by default */
+  width: 100%;
+  height: 100%;
+  background-color: #333; /* Grey background by default */
   border-radius: 10px;
   cursor: pointer;
   position: relative;
@@ -39,6 +51,7 @@ body {
   transform: rotateY(180deg);
 }
 
+/* Card Front and Back */
 .card-front, .card-back {
   width: 100%;
   height: 100%;
@@ -48,62 +61,107 @@ body {
 }
 
 .card-front {
-  background-color: white; /* White front */
-  border: 2px solid #333; /* Dark grey outline */
+  background-color: white; /* Visible white front */
+  border: 2px solid #FFD700; /* Gold border */
   background-image: url('images/logo-gc.png');
-  background-size: contain; /* Adjusted to contain */
-  background-repeat: no-repeat; /* Prevents repeating */
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
   transform: rotateY(0deg);
 }
 
 .card-back {
-  background-color: white; /* White picture side */
-  border: 2px solid black; /* Black outline */
-  background-size: contain; /* Image on the back */
+  background-color: white; /* White back */
+  border: 2px solid #333; /* Black outline */
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   transform: rotateY(180deg);
 }
 
+/* Disabled cards are visible but not clickable */
+.card.disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* Hidden class to make matched cards invisible */
 .hidden {
   visibility: hidden;
 }
 
-/* Center Play Again Button */
-#play-again-btn {
-  display: block;
-  margin: 20px auto;
+/* Button styling */
+.btn-gold {
+  background-color: #FFD700;
+  color: black;
+  font-weight: bold;
+  width: 100%;
+  transition: background-color 0.3s;
+  margin-top: 10px;
 }
 
+.btn-gold:hover {
+  background-color: #ffc700;
+  color: black;
+}
+
+.btn-outline-gold {
+  color: #FFD700;
+  border: 2px solid #FFD700;
+  background-color: transparent;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-gold:hover {
+  background-color: #FFD700;
+  color: black;
+}
+
+/* Timer and Turns */
+#game-stats {
+  color: #FFD700;
+  font-size: 1.2em;
+  margin: 15px 0;
+}
+
+#timer {
+  font-size: 1.2em;
+}
+
+/* Center Play Again Button */
+#play-again-btn, #start-game-btn, #start-over-btn {
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+}
 
 /* Confetti styling */
 .confetti {
   position: fixed;
-  width: 10px;  /* Base size, will vary */
+  width: 10px;
   height: 10px;
   top: 0;
   animation: confettiFall linear infinite;
   opacity: 0.8;
 }
 
-/* Varying sizes */
 .confetti:nth-child(3n+1) {
   width: 8px;
   height: 8px;
-  background-color: #ffd700; /* Gold */
+  background-color: #ffd700;
 }
 
 .confetti:nth-child(3n+2) {
   width: 12px;
   height: 12px;
-  background-color: #ffcc00; /* Yellowish gold */
+  background-color: #ffcc00;
 }
 
 .confetti:nth-child(3n+3) {
   width: 12px;
   height: 12px;
-  background-color: #f4a460; /* Sandy gold */
+  background-color: #f4a460;
 }
 
 /* Varying falling speeds and delays */
@@ -137,19 +195,19 @@ body {
     transform: translateY(0) rotate(0deg);
   }
   100% {
-    transform: translateY(100vh) rotate(720deg); /* Confetti falls and rotates faster */
+    transform: translateY(100vh) rotate(720deg);
   }
 }
 
-
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   #game-board {
-    grid-auto-rows: 120px; /* Adjust card height for tablets */
+    grid-auto-rows: 120px;
   }
 }
 
 @media (max-width: 480px) {
   #game-board {
-    grid-auto-rows: 100px; /* Adjust card height for mobile */
+    grid-auto-rows: 100px;
   }
 }
